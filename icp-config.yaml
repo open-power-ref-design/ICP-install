@@ -4,9 +4,9 @@ software_bootstrap:
         set -e
         apt-get update
         apt install git -y
-        rm -rf ICP-POWER-Up/
-        git clone https://github.com/mtarsel/ICP-POWER-Up.git
-        cd ICP-POWER-Up/
+        rm -rf ICP-install/
+        git clone https://github.com/open-power-ref-design/ICP-install.git
+        cd ICP-install/
         chmod +x icp-install.sh
         ./icp-install.sh
     - hosts: all
