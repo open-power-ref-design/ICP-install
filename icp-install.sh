@@ -8,18 +8,18 @@ function ctrl_c() {
         echo "Bye!"
 }
 
+#Keeping everything in build dir
 PROJECT_DIR=$(pwd)
 
 # ICP Variables
-ICP_FILE=ibm-cloud-private-ppc64le-2.1.0.3.tar.gz
-ICP_FILE_URL=http://pokgsa.ibm.com/projects/i/icp-2.1.0.3/$ICP_FILE
-ICP_LOCATION=/opt/ibm-cloud-private-2.1.0.3
-INCEPTION=ibmcom/icp-inception:2.1.0.3-ee
+ICP_LOCATION=/opt/ibm-cloud-private-3-1-0
+INCEPTION=ibmcom/icp-inception:3.1.0
 
 # Get the main IP of the host
 HOSTNAME_IP=$(ip route get 1 | awk '{print $NF;exit}')
 HOSTNAME=$(hostname)
 
+#in case supplied different IP than found, likely never used
 if [ -z "$1" ]; then
     EXTERNAL_IP=$HOSTNAME_IP
 else
@@ -65,13 +65,10 @@ echo -e "$HOSTNAME_IP $HOSTNAME" | tee -a /etc/hosts
 sed -i -- 's/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g' /etc/ssh/ssh_config
 
 # Prepare environment for ICP installation
-wget $ICP_FILE_URL
-tar xf $ICP_FILE -O | docker load
+docker pull $INCEPTION
 mkdir -p $ICP_LOCATION && cd $ICP_LOCATION || exit
 docker run -v "$(pwd)":/data -e LICENSE=accept $INCEPTION cp -r cluster /data
 cp /root/.ssh/id_rsa ./cluster/ssh_key
-mkdir -p ./cluster/images
-mv /root/$ICP_FILE ./cluster/images/
 
 cd ./cluster || exit
 
@@ -95,6 +92,14 @@ $HOSTNAME_IP
 #[va]
 #5.5.5.5
 " >> ./hosts
+
+# Make sure images are accesible
+echo "
+image-security-enforcement:
+   clusterImagePolicy:
+     - name: "docker.io/ibmcom/*"
+       policy:
+" >> ./config.yaml
 
 # Replace the entries in the config file to remove the comments of the external IPs
 sed -i -- "s/# cluster_lb_address: none/cluster_lb_address: $EXTERNAL_IP/g" ./config.yaml
