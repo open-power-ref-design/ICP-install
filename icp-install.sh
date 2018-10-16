@@ -1,5 +1,8 @@
 #!/bin/bash
-#Written by Rafael Sene and Mick Tarsel
+# Written by Rafael Sene and Mick Tarsel
+
+# Install IBM Cloud Private CE 3.1.0
+# Scroll to bottom for beginning of execution. 
 
 # Trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
@@ -8,7 +11,7 @@ function ctrl_c() {
         echo "Bye!"
 }
 
-#Keeping everything in build dir
+#Keeping everything in build dir for cleanup
 PROJECT_DIR=$(pwd)
 
 # ICP Variables
@@ -40,7 +43,7 @@ manage_ssh_keys(){
 }
 
 setup_package_repos(){
-  # Updating, upgrading and installing some packages
+  # Updating and installing vim python git
   export DEBIAN_FRONTEND=noninteractive
   apt-get update -yq
   apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade -yq
@@ -70,16 +73,17 @@ check_ports(){
 }
 
 configure_etc_hosts(){
-  # Configure network (/etc/hosts)
   # This line is required for a OpenStack or PowerVC environment
   sed -i -- 's/manage_etc_hosts: true/manage_etc_hosts: false/g' /etc/cloud/cloud.cfg
+  
+  # Configure network in /etc/hosts file
   sed -i '/127.0.1.1/s/^/#/g' /etc/hosts
   sed -i '/ip6-localhost/s/^/#/g' /etc/hosts
   echo -e "$HOSTNAME_IP $HOSTNAME" | tee -a /etc/hosts
 }
 
 setup_ICP_container(){
-  # Prepare environment for ICP installation
+  # Prepare environment for ICP installation by running icp-inception
   docker pull $INCEPTION
   cd $ICP_LOCATION || exit
   docker run -v "$(pwd)":/data -e LICENSE=accept $INCEPTION cp -r cluster /data
@@ -87,7 +91,7 @@ setup_ICP_container(){
 }
 
 setup_hosts_file(){
-  # Remove the content of the hosts file
+  # Remove the contents of the hosts file
   > $ICP_LOCATION/cluster/hosts
 
   # Add the IP of the single node in the hosts file
@@ -121,7 +125,10 @@ install_ICP(){
   docker run --net=host -t -e LICENSE=accept -v "$(pwd)":/installer/cluster $INCEPTION install
 }
 
+#####=================#####
 ##### BEGIN EXECUTION #####
+#####=================#####
+
 echo "Starting installation of ICP"
 
 echo "Creating new ssh keys..."
