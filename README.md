@@ -1,31 +1,35 @@
 # ICP-POWER-Up
 Install ICP via POWER-Up
 
-# Instructions
+# Getting Started
 
-Follow instructions on POWER-Up repo: https://github.com/open-power-ref-design-toolkit/power-up
-
-Provide a public IP address to our master node in order to access the ICP dashboard.
+Follow instructions on POWER-Up repo to setup pup: https://github.com/open-power-ref-design-toolkit/power-up
 
 Launch your cluster with ```pup deploy config.yml``` making sure your configuration file includes the snippet from the [icp-config.yaml](./icp-config.yaml). 
 
-NOTE: You will have to enter your sudo password once the deploy is started and then hit Enter a few times. This process will take over 1 hour to complete.
+Provide a public IP address to your master node in order to access the ICP dashboard.
+
+**NOTE:** You will have to enter your sudo password once the deploy is started and then hit Enter a few times. This process will take over 1 hour to complete.
 
 This will run through the entire installation process, starting with the installation of some Linux distribution and finishing by running the [icp-install.sh](./icp-install.sh) and installing ICP. Make sure your configuration file contains the info from [icp-config.yaml](./icp-config.yaml) in this repo.
 
-
-Deploy only software on nodes: ```pup post-deploy config.yml```
+## Deploying only software
+If you don't want to re-install Linux just run ```pup post-deploy config.yml```
 
 
 # How it Works
-The YAML file in this repo is only a snippet used to deploy a cluster. Add the [icp-config.yaml](./icp-config.yaml) section in this repo to the bottom of your actual config script.
+
+The config.yaml file drives the installation process. Inside this file contains all the switch info and network configurations. An example file is included in [config.yaml](./config.yaml).
+
+## The config.yml
+The [icp-config.yaml](./icp-config.yaml) YAML file in this repo is only a snippet used to deploy a cluster using [config.yaml](./config.yaml). 
 
 POWER-Up will identify a single node via the hostname, for our example the hostname is server-1.
 
 This single node will become the ICP Master. The bash script in this repo will be executed on that single ICP Master node.
 
 
-# Installing ICP
+## Installing ICP
 
 ICP is installed via [icp-install.sh](./icp-install.sh) in this repo. It utilizes 2 files taken from other repos.
 
