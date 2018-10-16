@@ -19,7 +19,9 @@ If you don't want to re-install Linux just run ```pup post-deploy config.yml```
 
 # How it Works
 
-The config.yaml file drives the installation process. Inside this file contains all the switch info and network configurations. An example file is included in [config.yaml](./config.yaml).
+The config.yaml file drives the installation process. Inside this file contains all the switch info and network configurations. 
+
+An example file is included in [config.yaml](./config.yaml).
 
 ## The config.yml
 The [icp-config.yaml](./icp-config.yaml) YAML file in this repo is only a snippet used to deploy a cluster using [config.yaml](./config.yaml). 
