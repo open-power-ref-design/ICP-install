@@ -9,5 +9,3 @@ software_bootstrap:
         cd ICP-install/
         chmod +x icp-install.sh
         ./icp-install.sh
-    - hosts: all
-      command: touch xyz.txt
