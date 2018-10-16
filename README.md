@@ -1,5 +1,5 @@
 # ICP-POWER-Up
-Install ICP via POWER-Up
+Install IBM Cloud Private using POWER-Up.
 
 # Getting Started
 
