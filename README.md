@@ -31,7 +31,7 @@ POWER-Up will identify a single node via the hostname, for our example the hostn
 This single node will become the ICP Master. The bash script in this repo will be executed on that single ICP Master node.
 
 
-## Installing ICP
+## Installing IBM Cloud Private CE
 
 ICP is installed via [icp-install.sh](./icp-install.sh) in this repo. It utilizes 2 files taken from other repos.
 
