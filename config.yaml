@@ -193,8 +193,6 @@ software_bootstrap:
         cd ICP-install/
         chmod +x icp-install.sh
         ./icp-install.sh 
-    - hosts: all
-      command: touch xyz.txt
 
 # Additional key/value pairs are not processed by Genesis, but are copied into
 # the inventory.yml file and made available to post-Genesis scripts and/or
