@@ -1,0 +1,149 @@
+nodes:
+-   label: power_servers
+    hostname: server-1
+    rack_id: rack_1
+    ipmi:
+        ipaddrs:
+        - 192.168.11.21
+        macs:
+        - 14:63:08:00:16:b2
+        password: 
+        ports:
+        - 12
+        switches:
+        - mgmt_1_1
+        userid: ADMIN
+    pxe:
+        devices:
+        - enP1p10s0f0
+        ipaddrs:
+        - 192.168.12.21
+        macs:
+        - 14:63:08:00:16:b3
+        ports:
+        - 11
+        rename:
+        - false
+        switches:
+        - mgmt_1_1
+    data:
+        devices:
+        - eth1
+        - eth2
+        macs:
+        - 7C:FE:90:A5:36:10
+        - 7C:FE:90:A5:36:21
+        ports:
+        - 33
+        - 34
+        rename:
+        - true
+        - true
+        switches:
+        - data_1_1
+        - data_1_1
+    os: &id001
+        hostname_prefix: server
+        profile: ubuntu-16.04.4-server-ppc64el
+        install_device: /dev/disk/by-path/pci-0000:01:00.0-sas-phy0-lun-0
+        users:
+        -   name: user1
+            password:
+    roles: null
+    interfaces:
+    -   label: pxe_ifc
+        description: pxe interface
+        iface: enP1p10s0f0
+        method: dhcp
+    -   label: bond1_interface1
+        description: manual bond ifc 1
+        iface: eth1
+        method: manual
+        bond_master: bond1
+    -   label: bond1_interface2
+        description: manual bond ifc 2
+        iface: eth2
+        method: manual
+        bond_master: bond1
+    -   label: bond1_mstr
+        description: bond interface 1
+        iface: bond1
+        method: static
+        netmask: 255.255.255.0
+        gateway: 9.3.89.1
+        dns_nameservers: 9.3.1.200 9.0.128.50
+        bond_mode: 802.3ad
+        bond_miimon: 100
+        bond_slaves: eth1 eth2
+        address: 9.3.89.34
+-   label: power_servers
+    hostname: server-2
+    rack_id: rack_1
+    ipmi:
+        ipaddrs:
+        - 192.168.11.22
+        macs:
+        - 14:63:08:00:16:c2
+        password: 
+        ports:
+        - 10
+        switches:
+        - mgmt_1_1
+        userid: ADMIN
+    pxe:
+        devices:
+        - enP1p10s0f0
+        ipaddrs:
+        - 192.168.12.22
+        macs:
+        - 14:63:08:00:16:c3
+        ports:
+        - 9
+        rename:
+        - false
+        switches:
+        - mgmt_1_1
+    data:
+        devices:
+        - eth1
+        - eth2
+        macs:
+        - 7C:FE:90:A5:32:30
+        - 7C:FE:90:A5:35:61
+        ports:
+        - 9
+        - 10
+        rename:
+        - true
+        - true
+        switches:
+        - data_1_1
+        - data_1_1
+    os: *id001
+    roles: null
+    interfaces:
+    -   label: pxe_ifc
+        description: pxe interface
+        iface: enP1p10s0f0
+        method: dhcp
+    -   label: bond1_interface1
+        description: manual bond ifc 1
+        iface: eth1
+        method: manual
+        bond_master: bond1
+    -   label: bond1_interface2
+        description: manual bond ifc 2
+        iface: eth2
+        method: manual
+        bond_master: bond1
+    -   label: bond1_mstr
+        description: bond interface 1
+        iface: bond1
+        method: static
+        netmask: 255.255.255.0
+        gateway: 9.3.89.1
+        dns_nameservers: 9.3.1.200 9.0.128.50
+        bond_mode: 802.3ad
+        bond_miimon: 100
+        bond_slaves: eth1 eth2
+        address: 9.3.89.36
