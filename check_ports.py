@@ -81,13 +81,13 @@ def main():
         # For every port in the main array of ports, check whether or not
         # a given port is available for usage.
         for port in ALL_PORTS:
-            TEXT_FILE.write("Checking port %s ..." % str(port))
+            TEXT_FILE.write("Checking port %s ...\n" % str(port))
             if check_port(port)[0] == 0:
                 USED_PORTS.append(port)
 
-        TEXT_FILE.write("***********************")
-        TEXT_FILE.write("Ports already in use: ")
-        TEXT_FILE.write("%s" % str(USED_PORTS))
+        TEXT_FILE.write("***********************\n")
+        TEXT_FILE.write("Ports already in use: \n")
+        TEXT_FILE.write("%s\n" % str(USED_PORTS))
 
     TEXT_FILE.close()
 
