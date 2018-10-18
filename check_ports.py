@@ -61,6 +61,7 @@ def cmdexists(command):
 
 def check_port(port):
     ''' Check whether or not a given port is available for usage '''
+    #TODO print process only for ports in use
     command="ss -tnlp | awk '{print $4}'| egrep -w \"" + str(port) + "\""
     return execute_stdout(command)
 
@@ -82,6 +83,7 @@ def main():
         # a given port is available for usage.
         for port in ALL_PORTS:
             TEXT_FILE.write("Checking port %s ...\n" % str(port))
+            #TODO thread it
             if check_port(port)[0] == 0:
                 USED_PORTS.append(port)
 
