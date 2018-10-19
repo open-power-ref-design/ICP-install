@@ -123,6 +123,9 @@ install_ICP(){
 
   # Install ICP
   docker run --net=host -t -e LICENSE=accept -v "$(pwd)":/installer/cluster $INCEPTION install
+
+  # Change smt=2
+  ppc64_cpu --smt=2 
 }
 
 #####=================#####
