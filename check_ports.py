@@ -67,6 +67,7 @@ def check_port(port):
 
 
 def main():
+    # https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/supported_system_config/required_ports.html
     PORTS=[80, 179, 443, 2222, 2380, 4001, 4194, 4300, 4500, 5000, 5044, \
             5046, 8001, 8080, 8082, 8084, 8101, 8181, 8443, 8500, 8600, \
             8743, 8888, 9200, 9235, 9300, 9443, 10248, 10249, 10250, \
@@ -96,4 +97,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
