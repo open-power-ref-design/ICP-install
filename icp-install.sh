@@ -2,7 +2,7 @@
 # Written by Rafael Sene and Mick Tarsel
 
 # Install IBM Cloud Private CE 3.1.0
-# Scroll to bottom for beginning of execution. 
+# Scroll to bottom for beginning of execution.
 
 # Trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
@@ -65,17 +65,65 @@ configure_port_range(){
   echo 'net.ipv4.ip_local_port_range="10240 60999"' | sudo tee -a /etc/sysctl.conf
 }
 
+_check_ports(){
+
+}
+
 check_ports(){
   # Verify what ports are available
   # https://github.com/rpsene/icp-scripts
-  [ -x $PROJECT_DIR/check_ports.py ] || chmod +x check_ports.py
-  python $PROJECT_DIR/check_ports.py
+  #[ -x $PROJECT_DIR/check_ports.py ] || chmod +x check_ports.py
+  #python $PROJECT_DIR/check_ports.py
+  PORTS=( 80, 179, 443, 2222, 2380, 4001, 4194, 4300, 4500, 5000, 5044, 5046, 8001,
+  8080, 8082, 8084, 8101, 8181, 8443, 8500, 8600, 8743, 8888, 9200, 9235, 9300,
+  9443, 10248, 10249, 10250, 10251, 10252, 18080, 24007, 24008, 35357 )
+
+# iterate thru ports and remove , seperating the values
+  for port in ${PORTS[@]/,/""}; do
+    if [ -n "$(ss -tnl | awk '{print $4}'| egrep -w $port)" ]; then
+      # if string is non-zero means port is used
+      echo "$port in use"
+      #get processID of port
+      netstat -nlp | grep :$port
+    fi
+  done
+
+#PORTS_RANGES=['10248:10252', '30000:32767', '49152:49251']
+
+  for port in `seq 10248 10252`;do
+    if [ -n "$(ss -tnl | awk '{print $4}'| egrep -w $port)" ]; then
+      # if string is non-zero means port is used
+      echo "$port in use"
+      #get processID of port
+      netstat -nlp | grep :$port
+    fi
+  done
+
+  for port in `seq 30000 32767`;do
+    if [ -n "$(ss -tnl | awk '{print $4}'| egrep -w $port)" ]; then
+      # if string is non-zero means port is used
+      echo "$port in use"
+      #get processID of port
+      netstat -nlp | grep :$port
+    fi
+  done
+
+  for port in `seq 49152 49251`;do
+    if [ -n "$(ss -tnl | awk '{print $4}'| egrep -w $port)" ]; then
+      # if string is non-zero means port is used
+      echo "$port in use"
+      #get processID of port
+      netstat -nlp | grep :$port
+    fi
+  done
+
+
 }
 
 configure_etc_hosts(){
   # This line is required for a OpenStack or PowerVC environment
   sed -i -- 's/manage_etc_hosts: true/manage_etc_hosts: false/g' /etc/cloud/cloud.cfg
-  
+
   # Configure network in /etc/hosts file
   sed -i '/127.0.1.1/s/^/#/g' /etc/hosts
   sed -i '/ip6-localhost/s/^/#/g' /etc/hosts
@@ -125,7 +173,7 @@ install_ICP(){
   docker run --net=host -t -e LICENSE=accept -v "$(pwd)":/installer/cluster $INCEPTION install
 
   # Change smt=2
-  ppc64_cpu --smt=2 
+  ppc64_cpu --smt=2
 }
 
 #####=================#####
