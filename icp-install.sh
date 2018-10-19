@@ -65,20 +65,15 @@ configure_port_range(){
   echo 'net.ipv4.ip_local_port_range="10240 60999"' | sudo tee -a /etc/sysctl.conf
 }
 
-_check_ports(){
-
-}
-
 check_ports(){
-  # Verify what ports are available
-  # https://github.com/rpsene/icp-scripts
-  #[ -x $PROJECT_DIR/check_ports.py ] || chmod +x check_ports.py
-  #python $PROJECT_DIR/check_ports.py
+  # Make sure these ports are open so ICP can use them
+
   PORTS=( 80, 179, 443, 2222, 2380, 4001, 4194, 4300, 4500, 5000, 5044, 5046, 8001,
   8080, 8082, 8084, 8101, 8181, 8443, 8500, 8600, 8743, 8888, 9200, 9235, 9300,
   9443, 10248, 10249, 10250, 10251, 10252, 18080, 24007, 24008, 35357 )
+#PORTS_RANGES=['10248:10252', '30000:32767', '49152:49251']
 
-# iterate thru ports and remove , seperating the values
+  # iterate thru ports and remove , seperating the values
   for port in ${PORTS[@]/,/""}; do
     if [ -n "$(ss -tnl | awk '{print $4}'| egrep -w $port)" ]; then
       # if string is non-zero means port is used
@@ -87,8 +82,6 @@ check_ports(){
       netstat -nlp | grep :$port
     fi
   done
-
-#PORTS_RANGES=['10248:10252', '30000:32767', '49152:49251']
 
   for port in `seq 10248 10252`;do
     if [ -n "$(ss -tnl | awk '{print $4}'| egrep -w $port)" ]; then
@@ -116,7 +109,6 @@ check_ports(){
       netstat -nlp | grep :$port
     fi
   done
-
 
 }
 
