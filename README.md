@@ -5,7 +5,7 @@ Install IBM Cloud Private CE using POWER-Up.
 
 1. Install pup: https://github.com/open-power-ref-design-toolkit/power-up Provide a public IP address to access the ICP dashboard.
 
-2. Create a  configuration file that includes this snippet from the [icp-config.yaml](./icp-config.yaml). Example [config.yaml](./config.yaml
+2. Create a  configuration file that includes this snippet from the [icp-config.yaml](./icp-config.yaml). Example [config.yaml](./config.yaml)
 
 3. Launch your cluster with ```pup deploy config.yml``` 
 
