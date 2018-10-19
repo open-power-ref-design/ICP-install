@@ -1,11 +1,13 @@
 # ICP-POWER-Up
 Install IBM Cloud Private CE using POWER-Up.
 
+https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/installing/install_containers_CE.html
+
 # Getting Started
 
 Follow instructions on POWER-Up repo to setup pup: https://github.com/open-power-ref-design-toolkit/power-up
 
-Launch your cluster with ```pup deploy config.yml``` making sure your configuration file includes the snippet from the [icp-config.yaml](./icp-config.yaml). 
+Launch your cluster with ```pup deploy config.yml``` making sure your configuration file includes the snippet from the [icp-config.yaml](./icp-config.yaml).
 
 Provide a public IP address to your master node in order to access the ICP dashboard.
 
@@ -19,12 +21,12 @@ If you don't want to re-install Linux just run ```pup post-deploy config.yml```
 
 # How it Works
 
-The config.yaml file drives the installation process. Inside this file contains all the switch info and network configurations. 
+The config.yaml file drives the installation process. Inside this file contains all the switch info and network configurations.
 
 An example file is included in [config.yaml](./config.yaml).
 
 ## The config.yml
-The [icp-config.yaml](./icp-config.yaml) YAML file in this repo is only a snippet used to deploy a cluster using [config.yaml](./config.yaml). 
+The [icp-config.yaml](./icp-config.yaml) YAML file in this repo is only a snippet used to deploy a cluster using [config.yaml](./config.yaml).
 
 POWER-Up will identify a single node via the hostname, for our example the hostname is server-1.
 
