@@ -21,7 +21,7 @@ INCEPTION=ibmcom/icp-inception:3.1.0
 mkdir -p $ICP_LOCATION
 
 # Get the main IP of the host
-HOSTNAME_IP=$(ip -o route get 8.8.8.8 | sed -e 's/^.* src \([^ ]*\) .*$/\1/')
+HOSTNAME_IP=$(ip -o route get 9.9.9.9 | sed -e 's/^.* src \([^ ]*\) .*$/\1/')
 HOSTNAME=$(hostname)
 
 #in case supplied different IP than found, likely never used
