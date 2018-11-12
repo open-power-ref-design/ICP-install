@@ -21,7 +21,7 @@ INCEPTION=ibmcom/icp-inception:3.1.0
 mkdir -p $ICP_LOCATION
 
 # Get the main IP of the host
-HOSTNAME_IP=$(ip route get 1 | awk '{print $NF;exit}')
+HOSTNAME_IP=$(ip -o route get 8.8.8.8 | sed -e 's/^.* src \([^ ]*\) .*$/\1/')
 HOSTNAME=$(hostname)
 
 #in case supplied different IP than found, likely never used
@@ -109,7 +109,6 @@ check_ports(){
       netstat -nlp | grep :$port
     fi
   done
-
 }
 
 configure_etc_hosts(){
