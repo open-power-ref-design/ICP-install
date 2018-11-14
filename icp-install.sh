@@ -122,6 +122,10 @@ configure_etc_hosts(){
 }
 
 setup_ICP_container(){
+  
+  # Turn smt off
+  ppc64_cpu --smt=off
+	
   # Prepare environment for ICP installation by running icp-inception
   docker pull $INCEPTION
   cd $ICP_LOCATION || exit
