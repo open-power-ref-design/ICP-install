@@ -31,6 +31,7 @@ else
     EXTERNAL_IP=$1
 fi
 
+
 manage_ssh_keys(){
   # Create SSH Key and overwrite any already created
   yes y | ssh-keygen -t rsa -f /root/.ssh/id_rsa -q -P ""
@@ -48,14 +49,7 @@ setup_package_repos_rhel(){
   yum install -y vim python git
 }
 
-# setup_package_repos_deb(){
-#   # Updating and installing vim python git
-#   export DEBIAN_FRONTEND=noninteractive
-#   apt-get update -yq
-#   apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade -yq
-#   apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install -yq vim python git
-# }
-
+#TODO
 install_docker(){
   # Verify file is executable and install Docker
   # https://github.com/rpsene/icp-scripts
@@ -95,7 +89,7 @@ check_ports(){
       # if string is non-zero means port is used
       echo "$port in use"
       #get processID of port
-      netstat -nlp | grep :$port
+      cat /etc/services | grep " $port/"
     fi
   done
 
@@ -104,7 +98,7 @@ check_ports(){
       # if string is non-zero means port is used
       echo "$port in use"
       #get processID of port
-      netstat -nlp | grep :$port
+    cat /etc/services | grep " $port/"
     fi
   done
 
@@ -113,7 +107,7 @@ check_ports(){
       # if string is non-zero means port is used
       echo "$port in use"
       #get processID of port
-      netstat -nlp | grep :$port
+        cat /etc/services | grep " $port/"
     fi
   done
 }
