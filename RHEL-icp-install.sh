@@ -85,7 +85,8 @@ check_ports(){
       # if string is non-zero means port is used
       echo "$port in use"
       #get processID of port
-      netstat -nlp | grep :$port
+      #TODO
+      cat /etc/services | grep " $port/"
     fi
   done
 
