@@ -49,7 +49,7 @@ setup_package_repos_rhel(){
   yum install -y vim python git
 }
 
-#TODO
+#TODO - this is dependent on customers entitlements!!!
 install_docker(){
   # Verify file is executable and install Docker
   # https://github.com/rpsene/icp-scripts
