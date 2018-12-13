@@ -8,6 +8,8 @@ software_bootstrap:
         #RHEL install
         if [ -f /etc/redhat-release ]; then
            yum update
+        #TODO this assume we have proper channels subscribed (git and docker)!!
+        #would be easier to host rpm pubicly and let rpm report that docker is not found
            yum install git
            git clone https://github.com/open-power-ref-design/ICP-install.git
            cd ICP-install/
