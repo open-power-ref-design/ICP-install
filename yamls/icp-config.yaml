@@ -6,6 +6,6 @@ software_bootstrap:
         apt install git -y
         rm -rf ICP-install/
         git clone https://github.com/open-power-ref-design/ICP-install.git
-        cd ICP-install/
+        cd ICP-install/scripts/
         chmod +x icp-install.sh
         ./icp-install.sh
