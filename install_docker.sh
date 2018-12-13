@@ -69,9 +69,6 @@ apt-get update -y
 # Install Docker
 apt-get install docker-ce -y
 
-# Run Hello World
-docker run hello-world
-
 # Enable Docker service
 systemctl enable docker
 
