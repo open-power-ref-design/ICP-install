@@ -1,5 +1,5 @@
 #!/bin/bash
-# Written by Rafael Sene and Mick Tarsel
+# Written by Mick Tarsel
 
 # Install IBM Cloud Private CE 3.1.0
 # Scroll to bottom for beginning of execution.
@@ -10,9 +10,6 @@ trap ctrl_c INT
 function ctrl_c() {
         echo "Bye!"
 }
-
-#Keeping everything in build dir for cleanup
-PROJECT_DIR=$(pwd)
 
 # ICP Variables
 ICP_LOCATION=/opt/ibm-cloud-private-3-1-0
@@ -51,10 +48,6 @@ setup_package_repos_rhel(){
 
 #TODO - this is dependent on customers entitlements!!!
 install_docker(){
-  # Verify file is executable and install Docker
-  # https://github.com/rpsene/icp-scripts
- # [ -x $PROJECT_DIR/install_docker.sh ] || chmod +x install_docker.sh
- # $PROJECT_DIR/install_docker.sh
  setenforce 0 # disable se-linux 
  service docker start
 }
