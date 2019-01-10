@@ -7,18 +7,14 @@ software_bootstrap:
         if [ -f /etc/redhat-release ]; then
            yum update
            #TODO this assumes we have proper channels enabled to install docker!!
-           wget https://github.com/open-power-ref-design/ICP-install/raw/master/icp-3.1.0-CE.ppc64le.rpm
-           yum install icp-3.1.0-CE.ppc64le.rpm
-           docker run --net=host -t -e LICENSE=accept -v /opt/ibm-cloud-private-3-1-0/cluster:/installer/cluster ibmcom/icp-inception:3.1.0 install
+           wget https://github.com/open-power-ref-design/ICP-install/blob/master/scripts/icp-install-rhel.sh
+           chmod +x icp-install-rhel.sh
+           ./icp-install-rhel.sh
         fi
        
 #Ubuntu install 
         if [ -f /etc/lsb-release ]; then
-           apt-get update
-           apt install git -y
-           rm -rf ICP-install/
-           git clone https://github.com/open-power-ref-design/ICP-install.git
-           cd ICP-install/scripts/
+           wget https://github.com/open-power-ref-design/ICP-install/blob/master/scripts/icp-install-debian.sh
            chmod +x icp-install-debian.sh
            ./icp-install-debian.sh 
         fi
