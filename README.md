@@ -48,7 +48,7 @@ https://github.com/rpsene/icp-scripts
 
 ### Red Hat Enterprise Linux
 
-ICP is installed using a rpm included in this repository and then executing a ```docker run``` command
+ICP is installed via [icp-install-rhel.sh](./scripts/icp-install-rhel.sh) in this repo. 
 
 # Removing and Cleanup
 
