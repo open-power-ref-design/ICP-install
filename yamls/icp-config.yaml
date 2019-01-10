@@ -15,6 +15,8 @@ software_bootstrap:
 #Ubuntu install 
         if [ -f /etc/lsb-release ]; then
            wget https://github.com/open-power-ref-design/ICP-install/blob/master/scripts/icp-install-debian.sh
+           wget https://github.com/open-power-ref-design/ICP-install/blob/master/scripts/install_docker.sh
            chmod +x icp-install-debian.sh
+           chmod +x install_docker.sh
            ./icp-install-debian.sh 
         fi
