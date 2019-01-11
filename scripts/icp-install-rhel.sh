@@ -180,7 +180,7 @@ echo "Creating new ssh keys..."
 manage_ssh_keys
 
 echo "Installing packages..."
-setup_package_repos
+setup_package_repos_rhel
 
 #echo "Installing docker..."
 #install_docker
