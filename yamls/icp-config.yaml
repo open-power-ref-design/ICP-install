@@ -6,7 +6,6 @@ software_bootstrap:
 #RHEL install
         if [ -f /etc/redhat-release ]; then
            yum update
-           #TODO this assumes we have proper channels enabled to install docker!!
            wget https://github.com/open-power-ref-design/ICP-install/blob/master/scripts/icp-install-rhel.sh
            chmod +x icp-install-rhel.sh
            ./icp-install-rhel.sh
