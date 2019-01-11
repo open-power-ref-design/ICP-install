@@ -6,15 +6,15 @@ software_bootstrap:
 #RHEL install
         if [ -f /etc/redhat-release ]; then
            yum update
-           wget https://github.com/open-power-ref-design/ICP-install/blob/master/scripts/icp-install-rhel.sh
+           wget https://raw.githubusercontent.com/open-power-ref-design/ICP-install/master/scripts/icp-install-rhel.sh
            chmod +x icp-install-rhel.sh
            ./icp-install-rhel.sh
         fi
        
 #Ubuntu install 
         if [ -f /etc/lsb-release ]; then
-           wget https://github.com/open-power-ref-design/ICP-install/blob/master/scripts/icp-install-debian.sh
-           wget https://github.com/open-power-ref-design/ICP-install/blob/master/scripts/install_docker.sh
+           wget https://raw.githubusercontent.com/open-power-ref-design/ICP-install/master/scripts/icp-install-debian.sh 
+           wget https://raw.githubusercontent.com/open-power-ref-design/ICP-install/master/scripts/install_docker.sh
            chmod +x icp-install-debian.sh
            chmod +x install_docker.sh
            ./icp-install-debian.sh 
