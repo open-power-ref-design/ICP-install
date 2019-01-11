@@ -182,8 +182,8 @@ manage_ssh_keys
 echo "Installing packages..."
 setup_package_repos_rhel
 
-#echo "Installing docker..."
-#install_docker
+echo "Starting docker..."
+install_docker
 
 echo "Configuring port ranges..."
 configure_port_range
