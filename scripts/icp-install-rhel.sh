@@ -60,7 +60,7 @@ configure_port_range(){
   echo 'net.ipv4.ip_local_port_range="10240 60999"' | sudo tee -a /etc/sysctl.conf
 
   #TODO disable firewalld?
-  #service firewalld stop
+  service firewalld stop
 }
 
 check_ports(){
