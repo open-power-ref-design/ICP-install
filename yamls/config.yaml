@@ -185,14 +185,11 @@ node_templates:
 software_bootstrap:
     - hosts: server-1
       command: |
-        set -e
-        apt-get update
-        apt install git -y
-        rm -rf ICP-install/
-        git clone https://github.com/open-power-ref-design/ICP-install.git
-        cd ICP-install/
-        chmod +x icp-install.sh
-        ./icp-install.sh 
+          wget https://raw.githubusercontent.com/open-power-ref-design/ICP-install/master/scripts/icp-install-debian.sh 
+          wget https://raw.githubusercontent.com/open-power-ref-design/ICP-install/master/scripts/install_docker.sh
+          chmod +x icp-install-debian.sh
+          chmod +x install_docker.sh
+          ./icp-install-debian.sh 
 
 # Additional key/value pairs are not processed by Genesis, but are copied into
 # the inventory.yml file and made available to post-Genesis scripts and/or
