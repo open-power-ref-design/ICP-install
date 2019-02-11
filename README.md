@@ -1,5 +1,5 @@
 # ICP-POWER-Up
-Install IBM Cloud Private 3.1.0 CE using POWER-Up (pup).
+Install IBM Cloud Private CE using POWER-Up (pup).
 
 # Getting Started
 
