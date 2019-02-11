@@ -8,7 +8,7 @@ software_bootstrap:
            yum update
            wget https://raw.githubusercontent.com/open-power-ref-design/ICP-install/master/scripts/icp-install-rhel.sh
            chmod +x icp-install-rhel.sh
-           ./icp-install-rhel.sh
+           ./icp-install-rhel.sh {{ icp-version }}
         fi
        
 #Ubuntu install 
@@ -17,5 +17,5 @@ software_bootstrap:
            wget https://raw.githubusercontent.com/open-power-ref-design/ICP-install/master/scripts/install_docker.sh
            chmod +x icp-install-debian.sh
            chmod +x install_docker.sh
-           ./icp-install-debian.sh 
+           ./icp-install-debian.sh {{ icp-version }} 
         fi
