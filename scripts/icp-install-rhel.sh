@@ -1,8 +1,9 @@
 #!/bin/bash
 # Written by Mick Tarsel
 
-# Install IBM Cloud Private CE 3.1.0
-# Scroll to bottom for beginning of execution.
+# Install IBM Cloud Private CE
+# Example how to run
+#   chmod +x ./icp-install-rhel.sh; ./icp-install-rhel.sh 3.1.1
 
 # Trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
@@ -11,23 +12,46 @@ function ctrl_c() {
         echo "Bye!"
 }
 
-# ICP Variables
-ICP_LOCATION=/opt/ibm-cloud-private-3-1-0
-INCEPTION=ibmcom/icp-inception:3.1.0
+setup_var_dirs() {
+  #First arg of this script is ICP version. 
+  #  then create installation directory
 
-mkdir -p $ICP_LOCATION
+  #get ICP version (from pup)
+  if [ -z "$1" ]; then
+    #argument 1 is a null string so install some version
+    ICP_VERSION=3.1.1
+  else
+    ICP_VERSION=$1
+  fi
 
-# Get the main IP of the host
-HOSTNAME_IP=$(ip -o route get 9.9.9.9 | sed -e 's/^.* src \([^ ]*\) .*$/\1/')
-HOSTNAME=$(hostname)
+  #TODO validate ICP version just to make sure we dont pull some rando container
+  #if [[ $ICP_VERSION =~ ^(\d+\.)?(\d+\.)?(\d+\$ ]];then
+#  if [[ $ICP_VERSION =~ ^[0-9]+\.[0-9]+\. ]];then
+#     echo $ICP_VERSION
+#  else
+#     echo "improper version format!"
+#     exit 1
+#  fi
 
-#in case supplied different IP than found, likely never used
-if [ -z "$1" ]; then
-    EXTERNAL_IP=$HOSTNAME_IP
-else
-    EXTERNAL_IP=$1
-fi
 
+  # ICP Variables
+  # replace the '.' with '-' in the version
+  ICP_LOCATION=/opt/ibm-cloud-private-"${ICP_VERSION//./-}"
+  INCEPTION=ibmcom/icp-inception:$ICP_VERSION
+
+  # Get the primary IP of the host
+  HOSTNAME_IP=$(ip -o route get 9.9.9.9 | sed -e 's/^.* src \([^ ]*\) .*$/\1/')
+  HOSTNAME=$(hostname)
+
+  mkdir -p $ICP_LOCATION
+
+  #TODO: change to $2 in case supplied different IP than found
+  #if [ -z "$1" ]; then
+  #    EXTERNAL_IP=$HOSTNAME_IP
+  #else
+  #    EXTERNAL_IP=$1
+  #fi
+}
 
 manage_ssh_keys(){
   # Create SSH Key and overwrite any already created
@@ -41,7 +65,6 @@ manage_ssh_keys(){
 }
 
 setup_package_repos_rhel(){
-  # Python is the only required pre-req for icp
   yum update -y
   yum install -y vim python git docker
 }
@@ -166,8 +189,6 @@ install_ICP(){
   # Install ICP
   docker run --net=host -t -e LICENSE=accept -v "$(pwd)":/installer/cluster $INCEPTION install
 
-  # Change smt=2
-  #ppc64_cpu --smt=2
 }
 
 #####=================#####
@@ -175,6 +196,7 @@ install_ICP(){
 #####=================#####
 
 echo "Starting installation of ICP"
+setup_vars_dirs
 
 echo "Creating new ssh keys..."
 manage_ssh_keys
