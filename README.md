@@ -7,7 +7,6 @@ Install IBM Cloud Private 3.1.0 CE using POWER-Up (pup).
 
 2. Create a  configuration file that includes this snippet from the [icp-config.yaml](./yamls/icp-config.yaml). Example [config.yaml](./yamls/config.yaml)
 
-<! -- 3. Launch your cluster with ```pup deploy config.yml``` --> 
 3. Launch your cluster with ```pup deploy --extra-vars 'icp-version=3.1.1' config.yml``` 
 
 
