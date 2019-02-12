@@ -40,7 +40,7 @@ To install ICP using pup, we download the bash script for the distribution of li
 
 ICP is installed via [icp-install-debian.sh](./scripts/icp-install-debian.sh) in this repo. 
 
-IBM documentation: https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/installing/install_containers_CE.html
+IBM documentation: https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.2/supported_system_config/system_reqs.html
 
 We also download and [install_docker.sh](./scripts/install_docker.sh) via the script in this repo.
 
