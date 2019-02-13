@@ -19,7 +19,7 @@ setup_var_dirs() {
   #get ICP version (from pup)
   if [ -z "$1" ]; then
     #argument 1 is a null string so install some version
-    ICP_VERSION=3.1.1
+    ICP_VERSION=3.1.2
   else
     ICP_VERSION=$1
   fi
