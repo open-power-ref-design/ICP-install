@@ -138,9 +138,6 @@ configure_etc_hosts(){
 
 setup_ICP_container(){
   
-  # Turn smt off
-  ppc64_cpu --smt=off
-	
   # Prepare environment for ICP installation by running icp-inception
   docker pull $INCEPTION
   cd $ICP_LOCATION || exit
@@ -179,11 +176,12 @@ install_ICP(){
   sed -i -- "s/# cluster_lb_address: none/cluster_lb_address: $EXTERNAL_IP/g" ./config.yaml
   sed -i -- "s/# proxy_lb_address: none/proxy_lb_address: $EXTERNAL_IP/g" ./config.yaml
 
+  # Validating the configuration
+  docker run -e LICENSE=accept --net=host -v “$(pwd)“:/installer/cluster $INCEPTION check | tee –a check.log
+
   # Install ICP
   docker run --net=host -t -e LICENSE=accept -v "$(pwd)":/installer/cluster $INCEPTION install
 
-  # Change smt=2
-  ppc64_cpu --smt=2
 }
 
 #####=================#####

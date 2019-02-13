@@ -186,6 +186,9 @@ install_ICP(){
   sed -i -- "s/# cluster_lb_address: none/cluster_lb_address: $EXTERNAL_IP/g" ./config.yaml
   sed -i -- "s/# proxy_lb_address: none/proxy_lb_address: $EXTERNAL_IP/g" ./config.yaml
 
+  # Validating the configuration
+  docker run -e LICENSE=accept --net=host -v “$(pwd)“:/installer/cluster $INCEPTION check | tee –a check.log
+
   # Install ICP
   docker run --net=host -t -e LICENSE=accept -v "$(pwd)":/installer/cluster $INCEPTION install
 
