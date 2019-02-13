@@ -42,6 +42,7 @@ setup_vars_dirs() {
   # Get the primary IP of the host
   HOSTNAME_IP=$(ip -o route get 9.9.9.9 | sed -e 's/^.* src \([^ ]*\) .*$/\1/')
   HOSTNAME=$(hostname)
+  EXTERNAL_IP=$HOSTNAME_IP
 
   mkdir -p $ICP_LOCATION
 
