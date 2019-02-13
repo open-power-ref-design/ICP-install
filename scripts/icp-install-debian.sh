@@ -12,7 +12,7 @@ function ctrl_c() {
         echo "Bye!"
 }
 
-setup_var_dirs() {
+setup_vars_dirs() {
   #First arg of this script is ICP version. 
   #  then create installation directory
 
@@ -179,9 +179,6 @@ install_ICP(){
   # Create admin password
   PASSWORD=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w32 | head -n1)
   sed -i -- "s/# default_admin_password:/default_admin_password: $PASSWORD/g" ./config.yaml
-
-  # Validating the configuration
-  #docker run -e LICENSE=accept --net=host -v “$(pwd)“:/installer/cluster $INCEPTION check | tee –a check.log
 
   # Install ICP
   docker run --net=host -t -e LICENSE=accept -v "$(pwd)":/installer/cluster $INCEPTION install
